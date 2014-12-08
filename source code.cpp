@@ -62,7 +62,7 @@ int main()
     cout << " " << endl;
     cout <<"===================================" << endl;
 }
-int mySequentialSearch(int array[], int size, int code, bool t)
+int mySequentialSearch(int array[], int size, int code)
 {
     int key = 0;
     bool found = false;
