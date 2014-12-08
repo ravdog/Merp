@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -13,7 +12,6 @@ int mySequentialSearch(int [], int, int);
 int main()
 {
     int Arr[300], size = 300, code;
-    bool t = false;
 
     // loading the access code file into the array
     ifstream fin("C:\\Files\\SystemAccessCodes.txt");
@@ -30,7 +28,7 @@ int main()
     cout << " " << endl;
 
     // while loop to establish the 'exit after 3 attempts' clause
-    while (attempt < 3)
+    while (attempt <= 3)
     {
         //stating how many attempts
         cout << "Attempt " << attempt << "/3: ENTER 4 DIGIT CODE ";
@@ -38,21 +36,8 @@ int main()
         //using the search function
         mySequentialSearch(Arr,size,code);
         //TRYING to be the verification of search
-        if (!t)
-        {
-            do
-            {
-                cout << "           NOT MATCHING! TRY AGAIN." << endl;
-            }
-            while attempt < 3;
-            attempt++;
-        }
+        attempt++;
     }
-    cout <<"===================================" << endl;
-    cout <<" ACCESS DENIED" << endl;
-    cout <<" BYE" << endl;
-    cout << " " << endl;
-    cout <<"===================================" << endl;
 return 0;
 }
 int mySequentialSearch(int array[], int size, int code)
@@ -75,11 +60,25 @@ int mySequentialSearch(int array[], int size, int code)
             cout <<"      WELCOME" << endl;
             cout << " " << endl;
             cout <<"===================================" << endl;
+            return 0;
         }
-        else
+        else if (!found)
         {
+            if (attempt < 3)
+            {
+                cout << "           NOT MATCHING! TRY AGAIN." << endl;
+            }
+            else if (attempt == 3)
+            {
+                cout <<"===================================" << endl;
+                cout <<" ACCESS DENIED" << endl;
+                cout <<" BYE" << endl;
+                cout << " " << endl;
+                cout <<"===================================" << endl;
+            }
 
-            cout << "           NOT MATCHING! TRY AGAIN." << endl;
+
+
         }
 return 0;
 }
