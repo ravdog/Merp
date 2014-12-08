@@ -1,28 +1,20 @@
 
-// Complier Info: Windows 7 Enterprise 64-bit, Lenovo T430, Code::Blocks 13.12
-// Purpose: This program is created to verify a login to a secure database.
-//----------------------------------------------------------------------------
-// Definition of the Variables:
-// code: the access codes, and a boolean variable to ensure it was found in the file;
-// Arr: the array into which the access code file was printed;
-// size: the size of the access codes;
-// key: the key to search inside the array
-// fin: the access code file
-// i: the count for the array to keep print into Arr until the end of the file;
-// found: whether or not the code was found
-// attempt: number of attempts
-
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 using namespace std;
 
-bool t =false;
+bool t = false;
+int attempt = 1;
+
+
 int mySequentialSearch(int [], int, int);
 
 int main()
 {
     int Arr[300], size = 300, code;
-    int attempt = 1;
+    bool t = false;
+
     // loading the access code file into the array
     ifstream fin("C:\\Files\\SystemAccessCodes.txt");
     if(fin.is_open())
@@ -33,34 +25,35 @@ int main()
             fin >> Arr[i];
         }
     }
-
+//prompt to enter code
     cout << "===== ENTER YOUR CODE TO ACCESS INTO THE SYSTEM====" << endl;
     cout << " " << endl;
-    while (attempt <= 3)
+
+    // while loop to establish the 'exit after 3 attempts' clause
+    while (attempt < 3)
     {
+        //stating how many attempts
         cout << "Attempt " << attempt << "/3: ENTER 4 DIGIT CODE ";
             cin >> code;
+        //using the search function
         mySequentialSearch(Arr,size,code);
+        //TRYING to be the verification of search
         if (!t)
         {
-            cout << "           NOT MATCHING! TRY AGAIN." << endl;
+            do
+            {
+                cout << "           NOT MATCHING! TRY AGAIN." << endl;
+            }
+            while attempt < 3;
             attempt++;
         }
-        else
-        {
-            cout <<"===================================" << endl;
-            cout <<" ACCESS GRANTED" << endl;
-            cout <<"      WELCOME" << endl;
-            cout << " " << endl;
-            cout <<"===================================" << endl;
-        }
-
     }
     cout <<"===================================" << endl;
     cout <<" ACCESS DENIED" << endl;
     cout <<" BYE" << endl;
     cout << " " << endl;
     cout <<"===================================" << endl;
+return 0;
 }
 int mySequentialSearch(int array[], int size, int code)
 {
@@ -77,16 +70,16 @@ int mySequentialSearch(int array[], int size, int code)
         }
         if (found)
         {
-            cout  << "It's all good, welcome" << endl;
-            t = true;
-            return t;
+            cout <<"===================================" << endl;
+            cout <<" ACCESS GRANTED" << endl;
+            cout <<"      WELCOME" << endl;
+            cout << " " << endl;
+            cout <<"===================================" << endl;
         }
         else
         {
-            cout << "Try Again." << endl;
-            t = false;
-            return t;
-        }
-    return 0;
 
+            cout << "           NOT MATCHING! TRY AGAIN." << endl;
+        }
+return 0;
 }
